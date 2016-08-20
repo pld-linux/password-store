@@ -1,12 +1,13 @@
 Summary:	Simple password store
 Name:		password-store
-Version:	1.4.2
-Release:	0.1
+Version:	1.6.5
+Release:	1
 License:	GPL v2+
 Group:		Applications
 Source0:	http://git.zx2c4.com/password-store/snapshot/%{name}-%{version}.tar.xz
-# Source0-md5:	c6382dbf5be4036021bf1ce61254b04b
-URL:		http://zx2c4.com/projects/password-store/
+# Source0-md5:	2c4468360c678184051e76f03c2f6b04
+URL:		https://www.passwordstore.org/
+BuildRequires:	rpmbuild(macros) >= 1.719
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	bash
@@ -16,10 +17,9 @@ Requires:	util-linux
 Suggests:	coreutils
 Suggests:	git-core
 Suggests:	xclip
+Provides:	pass = %{version}-%{release}
+Obsoletes:	pass
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define zshdir %{_datadir}/zsh/site-functions
-%define bashdir	%{_sysconfdir}/bash_completion.d
 
 %description
 This is a very simple password store that encrypts passwords using gpg
@@ -44,16 +44,13 @@ password-store.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{zshdir}
-
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT \
 	BINDIR=%{_bindir} \
 	LIBDIR=%{_libdir} \
 	MANDIR=%{_mandir} \
-	SYSCONFDIR=%{_sysconfdir}
-
-install -m644 contrib/pass.zsh-completion $RPM_BUILD_ROOT%{zshdir}/_pass
+	SYSCONFDIR=%{_sysconfdir} \
+	FORCE_ALL=1 \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -61,10 +58,10 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README
-%attr(755,root,root) %{_bindir}/*
-%{bashdir}/password-store
+%attr(755,root,root) %{_bindir}/pass
+%{bash_compdir}/pass
 %{_mandir}/man1/pass.1*
 
 %files -n zsh-completion-password-store
 %defattr(644,root,root,755)
-%{zshdir}/_pass
+%{zsh_compdir}/_pass
