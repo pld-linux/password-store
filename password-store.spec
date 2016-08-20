@@ -12,7 +12,7 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	bash
 Requires:	gnupg2
-Requires:	tree
+Requires:	tree >= 1.7.0
 Requires:	util-linux
 Suggests:	coreutils
 Suggests:	git-core
