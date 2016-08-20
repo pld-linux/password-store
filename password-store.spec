@@ -69,6 +69,8 @@ password-store.
 %prep
 %setup -q
 
+rm contrib/emacs/.gitignore
+
 %install
 rm -rf $RPM_BUILD_ROOT
 %{__make} install \
@@ -84,7 +86,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README
+%doc README contrib
 %attr(755,root,root) %{_bindir}/pass
 %{_mandir}/man1/pass.1*
 
