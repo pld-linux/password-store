@@ -19,6 +19,7 @@ Suggests:	git-core
 Suggests:	xclip
 Provides:	pass = %{version}-%{release}
 Obsoletes:	pass
+BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
