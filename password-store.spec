@@ -1,11 +1,11 @@
 Summary:	Simple password store
 Name:		password-store
-Version:	1.6.5
+Version:	1.7.1
 Release:	1
 License:	GPL v2+
 Group:		Applications
 Source0:	http://git.zx2c4.com/password-store/snapshot/%{name}-%{version}.tar.xz
-# Source0-md5:	2c4468360c678184051e76f03c2f6b04
+# Source0-md5:	44f735d7d6c1664d87ee0ec7338af43a
 URL:		https://www.passwordstore.org/
 BuildRequires:	rpmbuild(macros) >= 1.720
 BuildRequires:	tar >= 1:1.22
@@ -78,7 +78,7 @@ rm -rf $RPM_BUILD_ROOT
 	LIBDIR=%{_libdir} \
 	MANDIR=%{_mandir} \
 	SYSCONFDIR=%{_sysconfdir} \
-	FORCE_ALL=1 \
+	WITH_ALLCOMP=yes \
 	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
