@@ -6,6 +6,7 @@ License:	GPL v2+
 Group:		Applications
 Source0:	https://git.zx2c4.com/password-store/snapshot/%{name}-%{version}.tar.xz
 # Source0-md5:	db2d49af9e666cc5ef6aa1c61ae5c045
+Patch0:		bashcomp-noleak.patch
 URL:		https://www.passwordstore.org/
 BuildRequires:	rpmbuild(macros) >= 1.720
 BuildRequires:	tar >= 1:1.22
@@ -68,6 +69,7 @@ password-store.
 
 %prep
 %setup -q
+%patch0 -p1
 
 rm contrib/emacs/.gitignore
 

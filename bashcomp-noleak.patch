@@ -1,0 +1,53 @@
+commit 983efbbfd3848ed719b30407d4cc632b01dd9385
+Author: Elan Ruusamäe <glen@pld-linux.org>
+Date:   Wed Sep 12 23:12:56 2018 +0300
+
+    bash_completion: do not leak variables to globals scope
+    
+    Signed-off-by: Elan Ruusamäe <glen@pld-linux.org>
+
+diff --git a/src/completion/pass.bash-completion b/src/completion/pass.bash-completion
+index bbe9d0c..08f3401 100644
+--- a/src/completion/pass.bash-completion
++++ b/src/completion/pass.bash-completion
+@@ -5,10 +5,10 @@
+ # This file is licensed under the GPLv2+. Please see COPYING for more information.
+ 
+ _pass_complete_entries () {
+-	prefix="${PASSWORD_STORE_DIR:-$HOME/.password-store/}"
++	local prefix="${PASSWORD_STORE_DIR:-$HOME/.password-store/}"
+ 	prefix="${prefix%/}/"
+-	suffix=".gpg"
+-	autoexpand=${1:-0}
++	local suffix=".gpg"
++	local autoexpand=${1:-0}
+ 
+ 	local IFS=$'\n'
+ 	local items=($(compgen -f $prefix$cur))
+@@ -17,7 +17,7 @@ _pass_complete_entries () {
+ 	# it is a directory, then don't add a space to the completion
+ 	local firstitem=""
+ 	# Use counter, can't use ${#items[@]} as we skip hidden directories
+-	local i=0
++	local i=0 item
+ 
+ 	for item in ${items[@]}; do
+ 		[[ $item =~ /\.[^/]*$ ]] && continue
+@@ -27,7 +27,7 @@ _pass_complete_entries () {
+ 		if [[ ${#items[@]} -eq 1 && $autoexpand -eq 1 ]]; then
+ 			while [[ -d $item ]]; do
+ 				local subitems=($(compgen -f "$item/"))
+-				local filtereditems=( )
++				local filtereditems=( ) item2
+ 				for item2 in "${subitems[@]}"; do
+ 					[[ $item2 =~ /\.[^/]*$ ]] && continue
+ 					filtereditems+=( "$item2" )
+@@ -59,7 +59,7 @@ _pass_complete_entries () {
+ }
+ 
+ _pass_complete_folders () {
+-	prefix="${PASSWORD_STORE_DIR:-$HOME/.password-store/}"
++	local prefix="${PASSWORD_STORE_DIR:-$HOME/.password-store/}"
+ 	prefix="${prefix%/}/"
+ 
+ 	local IFS=$'\n'
