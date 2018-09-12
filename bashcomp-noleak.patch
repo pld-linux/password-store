@@ -1,10 +1,15 @@
-commit 983efbbfd3848ed719b30407d4cc632b01dd9385
-Author: Elan Ruusamäe <glen@pld-linux.org>
-Date:   Wed Sep 12 23:12:56 2018 +0300
+From 983efbbfd3848ed719b30407d4cc632b01dd9385 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Elan=20Ruusam=C3=A4e?= <glen@pld-linux.org>
+Date: Wed, 12 Sep 2018 23:12:56 +0300
+Subject: [PATCH] bash_completion: do not leak variables to globals scope
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-    bash_completion: do not leak variables to globals scope
-    
-    Signed-off-by: Elan Ruusamäe <glen@pld-linux.org>
+Signed-off-by: Elan Ruusamäe <glen@pld-linux.org>
+---
+ src/completion/pass.bash-completion | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
 diff --git a/src/completion/pass.bash-completion b/src/completion/pass.bash-completion
 index bbe9d0c..08f3401 100644
@@ -51,3 +56,6 @@ index bbe9d0c..08f3401 100644
  	prefix="${prefix%/}/"
  
  	local IFS=$'\n'
+-- 
+2.18.0
+
