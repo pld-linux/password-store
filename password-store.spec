@@ -59,6 +59,7 @@ Summary:	zsh-completion for password-store
 Summary(pl.UTF-8):	Uzupełnianie nazw w zsh dla password-store
 Group:		Applications/Shells
 Requires:	%{name} = %{version}-%{release}
+Requires:	bash >= 4.0
 
 %description -n zsh-completion-password-store
 zsh-completion for password-store.
