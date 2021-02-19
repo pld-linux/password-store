@@ -74,6 +74,8 @@ password-store.
 
 rm contrib/emacs/.gitignore
 
+%{__sed} -i -e '1s,/usr/bin/env bash,%{__bash},' src/password-store.sh
+
 %install
 rm -rf $RPM_BUILD_ROOT
 %{__make} install \
