@@ -16,6 +16,7 @@ Requires:	tree >= 1.7.0
 Requires:	util-linux
 Suggests:	coreutils
 Suggests:	git-core
+Suggests:	qrencode
 Suggests:	wl-clipboard
 Suggests:	xclip
 Provides:	pass = %{version}-%{release}
